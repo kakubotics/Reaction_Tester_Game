@@ -1,0 +1,151 @@
+
+<html>
+
+	<head>
+			<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+			<title>Reaction Timer</title>
+																												
+			<style type="text/css">
+	
+				#shape{
+				
+					width:200px;
+					height:200px;
+					background-color:red;
+					display:none;
+					position:relative;
+					
+				
+				}
+				
+				#mainText{
+				
+					font-family: 'Lobster', cursive;
+					color:#8D1C00;
+				
+				}
+				
+				#good{
+					color:red;
+				
+				}
+				
+				.bold{
+				
+					font-weight:bold;
+				}
+				
+				#Dev{
+				
+				position:relative;
+				bottom:300px;
+				left:500px;
+				
+				}
+			
+			
+			</style>
+			
+			
+	
+	</head>
+	 
+	<body>
+		<h3 id="mainText">This game is to check your reaction time are you ready?. 
+		Click! the shape as fast as possible>>>></h3>
+	
+		<p id="good"></p>
+		<p class="bold"> your time: <span id="timeTaken"></span></p>
+		<button id="quit">Quit</button>
+		<div id="shape"></div>
+		
+		
+		<script type="text/javascript">
+			
+			
+			document.getElementById("quit").onclick =function(){
+			
+				window.close();
+			
+			};
+			var start = new Date().getTime();
+			
+			function makeShapeAppear(){
+			
+			
+					var top = Math.random()*400;
+					var left = Math.random()*400;
+					var width = (Math.random()*300) + 100;
+					
+					if (Math.random()>0.5)
+					{
+						document.getElementById("shape").style.borderRadius = "50%";
+					}
+					
+					else
+					{
+						document.getElementById("shape").style.borderRadius = "0%";
+					}
+					document.getElementById("shape").style.backgroundColor = anyColor();
+					document.getElementById("shape").style.top =top +"px";
+					document.getElementById("shape").style.left =left +"px";
+					document.getElementById("shape").style.width =width +"px";
+					document.getElementById("shape").style.height =width +"px";
+				
+					document.getElementById("shape").style.display="block";
+					
+					start = new Date().getTime();
+				
+				}
+				
+				function anyColor(){
+				
+				
+					var letters= "0123456789ABCDEF".split("");
+					var color = "#";
+					for(i=0;i<6;i++)
+					{
+						color += letters[Math.floor(Math.random() * 16)];
+					}
+					
+					return (color);
+				
+				
+				}
+				
+				function appearAfterDelay(){
+				
+				
+				setTimeout(makeShapeAppear,Math.random()*2000);	
+				
+				
+				}
+				
+			appearAfterDelay();
+			document.getElementById("shape").onclick =function(){
+				
+				
+				document.getElementById("shape").style.display ="none";
+				var end = new Date().getTime();
+				
+				var timeTaken = (end -start) /1000;
+				
+				
+				 
+				document.getElementById("timeTaken").innerHTML =timeTaken + "s";
+				if(timeTaken<=0.7)
+				{
+					document.getElementById("good").innerHTML = "hey good! you are too fast"; 
+				}
+			
+				appearAfterDelay();
+			
+			}
+		
+		
+		</script>
+	
+	</body>
+
+
+</html>
